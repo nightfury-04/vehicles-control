@@ -1,0 +1,69 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "plugin:react/jsx-runtime",
+        "standard",
+        "plugin:chai-friendly/recommended",
+        "plugin:prettier/recommended"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "prettier"
+    ],
+    "rules": {
+        "prettier/prettier": [
+            "error",
+            {
+                "useTabs": false,
+                "semi": false,
+                "tabWidth": 4,
+                "printWidth": 160,
+                "singleQuote": true,
+                "jsxSingleQuote": true,
+                "trailingComma": "all",
+                "bracketSpacing": true,
+                "bracketSameLine": false,
+                "arrowParens": "avoid",
+                "endOfLine": "auto"
+            }
+        ],
+        "no-console": [
+            "warn",
+            {
+                "allow": [
+                    "warn",
+                    "error"
+                ]
+            }
+        ],
+        "no-new": 0,
+        "no-unused-vars": "error",
+        "react/prop-types": 0,
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
+            }
+        ],
+        "array-callback-return": 0
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    }
+}
