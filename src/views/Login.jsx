@@ -1,20 +1,34 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { signIn } from '../actions/auth.actions'
+import { Container, Box, TextField, Button, IconButton, InputAdornment } from '@mui/material'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 
-import Container from '@mui/material/Container'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import InputAdornment from '@mui/material/InputAdornment'
-import Visibility from '@mui/icons-material/Visibility'
-import VisibilityOff from '@mui/icons-material/VisibilityOff'
+function Login(props) {
+    const auth = useSelector(state => state.auth)
+    const dispatch = useDispatch()
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [visibility, setVisibility] = useState(false)
 
-const Login = () => {
-    const handleSubmit = e => {
-        e.preventDefault()
+    useEffect(() => {
+        if (auth.info) {
+            props.history.push('/')
+        }
+    })
+
+    const handleEmailChange = e => {
+        setEmail(e.target.value)
     }
 
-    const [visibility, setVisibility] = useState(false)
+    const handlePasswordChange = e => {
+        setPassword(e.target.value)
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault()
+        dispatch(signIn(email, password))
+    }
 
     return (
         <Container maxWidth='sm'>
@@ -30,23 +44,25 @@ const Login = () => {
             </h1>
 
             <form onSubmit={handleSubmit}>
-                <TextField id='email' label='Correo' variant='outlined' fullWidth style={{ margin: '15px' }} />
+                <TextField id='email' label='Correo' variant='outlined' fullWidth style={{ margin: '15px' }} onChange={handleEmailChange} />
 
                 <TextField
                     id='password'
                     label='Contraseña'
                     variant='outlined'
+                    type={visibility ? 'text' : 'password'}
                     fullWidth
                     style={{ margin: '15px' }}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position='start'>
-                                <IconButton onClick={() => {}} edge='end'>
-                                    {visibility ? <VisibilityOff /> : <Visibility /> && setVisibility(true)}
+                                <IconButton onClick={() => setVisibility(!visibility)} edge='end'>
+                                    {visibility ? <Visibility /> : <VisibilityOff />}
                                 </IconButton>
                             </InputAdornment>
                         ),
                     }}
+                    onChange={handlePasswordChange}
                 />
 
                 <Box style={{ display: 'flex', justifyContent: 'center', margin: '20px' }}>

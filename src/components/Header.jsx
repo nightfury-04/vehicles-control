@@ -1,5 +1,4 @@
-import Divider from '@mui/material/Divider'
-import Container from '@mui/material/Container'
+import { Container, Divider } from '@mui/material'
 import { grey } from '@mui/material/colors'
 
 const image = {
@@ -7,7 +6,7 @@ const image = {
     maxWidth: 360,
 }
 
-const Header = () => {
+function Header() {
     return (
         <Container disableGutters maxWidth={false}>
             <Container disableGutters>

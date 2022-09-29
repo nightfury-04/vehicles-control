@@ -1,23 +1,49 @@
-import { useState } from 'react'
-
-import Container from '@mui/material/Container'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import InputAdornment from '@mui/material/InputAdornment'
-import Visibility from '@mui/icons-material/Visibility'
-import VisibilityOff from '@mui/icons-material/VisibilityOff'
-import Grid from '@mui/material/Grid'
+import { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import SelectImage from '../components/SelectImage'
+import { addVehicle } from '../actions/vehicles.actions'
+import { Container, Box, TextField, Button, IconButton, InputAdornment, Grid } from '@mui/material'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 
 const AddVehicle = () => {
-    /*
-    const handleSubmit = e => {
-        e.preventDefault()
-    }
-    */
-
+    const dispatch = useDispatch()
+    const [vehicleInfo, setVehicleInfo] = useState({})
+    const history = useHistory()
     const [visibility, setVisibility] = useState(false)
+
+    const [, setImage, SelectImageComponent] = SelectImage({
+        onChange: url => {
+            setVehicleInfo({ ...vehicleInfo, frontPictureURL: url })
+        },
+    })
+
+    useEffect(() => {
+        setImage('/imgs/no-photo.png')
+    }, [])
+
+    useEffect(() => {
+        if (vehicleInfo.frontPictureURL) {
+            setImage(vehicleInfo.frontPictureURL)
+        }
+    }, [vehicleInfo.frontPictureURL, setImage])
+
+    const onSubmit = e => {
+        console.log('holi')
+        e.preventDefault()
+        new Promise(resolve => {
+            resolve()
+            dispatch(addVehicle(vehicleInfo))
+            history.push('/')
+        })
+    }
+
+    const handleChange = e => {
+        setVehicleInfo({
+            ...vehicleInfo,
+            [e.target.name]: e.target.value,
+        })
+    }
 
     return (
         <Container>
@@ -32,35 +58,25 @@ const AddVehicle = () => {
                 Añadir un vehículo
             </h1>
 
-            <Grid container alignItems='flex-start' spacing={1}>
+            <Grid container alignItems='flex-start' spacing={0}>
                 <Grid
                     item
-                    xs={10}
-                    sm={10}
-                    md={7}
-                    lg={6}
-                    xl={6}
+                    xs={12}
+                    md={6}
                     style={{
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',
                     }}
                 >
-                    <img
-                        style={{
-                            margin: '0 auto',
-                            height: '50%',
-                            width: '55%',
-                        }}
-                        src='/imgs/no-photo.png'
-                        alt='No Photo'
-                    />
+                    <SelectImageComponent />
                 </Grid>
-                <Grid item xs={12} sm={10} md={5} lg={6} xl={6}>
-                    <TextField id='brand' label='Marca' variant='outlined' fullWidth style={{ margin: '10px' }} />
-                    <TextField id='model' label='Modelo' variant='outlined' fullWidth style={{ margin: '10px' }} />
+                <Grid item xs={12} md={6}>
+                    <TextField id='brand' name='brand' label='Marca' variant='outlined' fullWidth style={{ margin: '10px' }} onChange={handleChange} />
+                    <TextField id='model' name='model' label='Modelo' variant='outlined' fullWidth style={{ margin: '10px' }} onChange={handleChange} />
                     <TextField
                         id='year'
+                        name='year'
                         label='Año'
                         variant='outlined'
                         fullWidth
@@ -74,14 +90,16 @@ const AddVehicle = () => {
                                 </InputAdornment>
                             ),
                         }}
+                        onChange={handleChange}
                     />
                 </Grid>
             </Grid>
-            <Box style={{ display: 'flex', justifyContent: 'right', margin: '20px' }}>
-                <Button variant='contained' style={{ height: '40px', width: 'auto' }}>
+            <Box style={{ display: 'flex', justifyContent: 'right', marginTop: '20px' }}>
+                <Button variant='contained' style={{ height: '40px', width: 'auto' }} type='submit' form='add-vehicle'>
                     Añadir vehículo
                 </Button>
             </Box>
+            <form id='add-vehicle' onSubmit={onSubmit}></form>
         </Container>
     )
 }

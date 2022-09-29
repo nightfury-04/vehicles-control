@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { storage } from '../config/firebase'
 import { v4 as uuidv4 } from 'uuid'
-import { Card, CardMedia, CardContent, CardActions, IconButton } from '@mui/material'
+import { Card, CardMedia, IconButton } from '@mui/material'
 
 function SelectImage({ title = '', disabled = false, required = false, onChange = () => {} }) {
     const [image, setImage] = useState('')
@@ -29,31 +29,17 @@ function SelectImage({ title = '', disabled = false, required = false, onChange 
     function SelectImageComponent() {
         return (
             <Card style={{ maxWidth: '400px' }} variant='outlined'>
-                <CardContent>
-                    <CardMedia
-                        style={{
-                            height: 0,
-                            paddingTop: '100%',
-                            borderRadius: '4px',
-                            border: '1px solid rgba(0, 0, 0, 0.12)',
-                        }}
-                        image={image}
-                        title={title}
+                <IconButton variant='contained' component='label' aria-label='Subir al servidor' disabled={disabled} required={required}>
+                    <CardMedia component='img' height='100%' image={image} title={title} />
+                    <input
+                        type='file'
+                        accept='image/x-png,image/gif,image/jpeg'
+                        onChange={handleChangePicture}
+                        disabled={disabled}
+                        required={required}
+                        hidden
                     />
-                </CardContent>
-                <CardActions disableSpacing>
-                    <IconButton variant='contained' component='label' aria-label='Subir al servidor' disabled={disabled} required={required}>
-                        OK
-                        <input
-                            type='file'
-                            accept='image/x-png,image/gif,image/jpeg'
-                            disabled={disabled}
-                            onChange={handleChangePicture}
-                            required={required}
-                            hidden
-                        />
-                    </IconButton>
-                </CardActions>
+                </IconButton>
             </Card>
         )
     }

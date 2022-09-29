@@ -83,7 +83,7 @@ function VehicleCard(props) {
 
     return (
         <Card variant='outlined' className={classes.card}>
-            <CardMedia component='img' height='100%' image={props.frontPictureURL} alt='Paella dish' />
+            <CardMedia component='img' height='100%' image={props.frontPictureURL} alt='Vehicle pic' />
             <IconButton className={classes.deleteButton} onClick={() => onClick(props.id)}>
                 <DeleteIcon />
             </IconButton>

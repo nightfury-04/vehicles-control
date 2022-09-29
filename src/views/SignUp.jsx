@@ -1,19 +1,12 @@
 import { useState } from 'react'
 
-import Container from '@mui/material/Container'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
-import IconButton from '@mui/material/IconButton'
-import InputAdornment from '@mui/material/InputAdornment'
-import Visibility from '@mui/icons-material/Visibility'
-import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import { Container, Box, TextField, Button, IconButton, InputAdornment } from '@mui/material'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 
-const SignUp = () => {
+function SignUp() {
     const handleSubmit = e => {
         e.preventDefault()
     }
-
     const [visibility, setVisibility] = useState(false)
 
     return (
@@ -36,13 +29,14 @@ const SignUp = () => {
                     id='password'
                     label='Contraseña'
                     variant='outlined'
+                    type={visibility ? 'text' : 'password'}
                     fullWidth
                     style={{ margin: '15px' }}
                     InputProps={{
                         endAdornment: (
                             <InputAdornment position='start'>
-                                <IconButton onClick={() => {}} edge='end'>
-                                    {visibility ? <VisibilityOff /> : <Visibility /> && setVisibility(true)}
+                                <IconButton onClick={() => setVisibility(!visibility)} edge='end'>
+                                    {visibility ? <Visibility /> : <VisibilityOff />}
                                 </IconButton>
                             </InputAdornment>
                         ),
