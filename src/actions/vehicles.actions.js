@@ -81,10 +81,19 @@ const addVehicle = vehicle => dispatch => {
 
     vehiclesRef
         .add({ ...vehicle, deleted: false, timestamp: new Date().getTime() })
-        .then(res => {
-            dispatch({
-                type: ADD_VEHICLE_SUCCESS,
-                payload: null,
+        .then(() => {
+            vehiclesRef.get().then(snapshot => {
+                const vehicles = []
+                snapshot.forEach(doc => {
+                    vehicles.push({
+                        id: doc.id,
+                        ...doc.data(),
+                    })
+                })
+                dispatch({
+                    type: ADD_VEHICLE_SUCCESS,
+                    payload: vehicles,
+                })
             })
         })
         .catch(error => {
