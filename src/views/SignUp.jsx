@@ -9,7 +9,7 @@ import InputAdornment from '@mui/material/InputAdornment'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
 
-const Login = () => {
+const SignUp = () => {
     const handleSubmit = e => {
         e.preventDefault()
     }
@@ -26,7 +26,7 @@ const Login = () => {
                     fontFamily: 'Inter, sans-serif',
                 }}
             >
-                Iniciar Sesión
+                Crear Cuenta
             </h1>
 
             <form onSubmit={handleSubmit}>
@@ -51,7 +51,7 @@ const Login = () => {
 
                 <Box style={{ display: 'flex', justifyContent: 'center', margin: '20px' }}>
                     <Button variant='contained' style={{ height: '40px', width: '150px' }}>
-                        Iniciar Sesión
+                        Crear Cuenta
                     </Button>
                 </Box>
             </form>
@@ -59,4 +59,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default SignUp
