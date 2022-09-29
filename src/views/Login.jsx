@@ -3,8 +3,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { signIn } from '../actions/auth.actions'
 import { Container, Box, TextField, Button, IconButton, InputAdornment } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { makeStyles } from 'tss-react/mui'
+import { login } from '../assets/styles.js'
+
+const useStyles = makeStyles()(login)
 
 function Login(props) {
+    const { classes } = useStyles()
+
     const auth = useSelector(state => state.auth)
     const dispatch = useDispatch()
     const [email, setEmail] = useState('')
@@ -32,16 +38,7 @@ function Login(props) {
 
     return (
         <Container maxWidth='sm'>
-            <h1
-                style={{
-                    fontSize: '32px',
-                    padding: '25px',
-                    textAlign: 'center',
-                    fontFamily: 'Inter, sans-serif',
-                }}
-            >
-                Iniciar Sesión
-            </h1>
+            <h1 className={classes.title}>Iniciar Sesión</h1>
 
             <form onSubmit={handleSubmit}>
                 <TextField id='email' label='Correo' variant='outlined' fullWidth style={{ margin: '15px' }} onChange={handleEmailChange} />
@@ -65,8 +62,8 @@ function Login(props) {
                     onChange={handlePasswordChange}
                 />
 
-                <Box style={{ display: 'flex', justifyContent: 'center', margin: '20px' }}>
-                    <Button variant='contained' style={{ height: '40px', width: '150px' }}>
+                <Box className={classes.box}>
+                    <Button variant='contained' className={classes.buttonSignUp}>
                         Iniciar Sesión
                     </Button>
                 </Box>
