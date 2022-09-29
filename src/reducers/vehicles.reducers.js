@@ -1,4 +1,4 @@
-import { FETCH_ALL_VEHICLES, FETCH_ALL_VEHICLES_SUCCESS, FETCH_ALL_VEHICLES_FAILED } from '../actions/types'
+import { FETCH_ALL_VEHICLES, FETCH_ALL_VEHICLES_SUCCESS, FETCH_ALL_VEHICLES_FAILED, DELETE_VEHICLE_SUCCESS, ADD_VEHICLE_SUCCESS } from '../actions/types'
 
 export const INITIAL_STATE = {
     vehicles: null,
@@ -25,6 +25,18 @@ const vehicles = (state = INITIAL_STATE, action) => {
                 vehicles: null,
                 loading: false,
                 error: action.payload,
+            }
+        case DELETE_VEHICLE_SUCCESS:
+            return {
+                ...state,
+                vehicles: action.payload,
+                loading: false,
+            }
+        case ADD_VEHICLE_SUCCESS:
+            return {
+                ...state,
+                vehicles: action.payload,
+                loading: false,
             }
         default:
             return state

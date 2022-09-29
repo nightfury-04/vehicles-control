@@ -1,20 +1,24 @@
 import { Container, Divider } from '@mui/material'
 import { grey } from '@mui/material/colors'
+import { makeStyles } from 'tss-react/mui'
+import { header } from '../assets/styles'
 
-const image = {
-    width: '15%',
-    maxWidth: 360,
-}
+const useStyles = makeStyles()(header)
 
-function Header() {
+function Header({ children }) {
+    const { classes } = useStyles()
+
     return (
-        <Container disableGutters maxWidth={false}>
-            <Container disableGutters>
-                <img style={image} src='/imgs/logo-clupp.png' alt='Logo Clupp'></img>
-            </Container>
+        <>
+            <Container disableGutters maxWidth={false}>
+                <Container disableGutters className={classes.header}>
+                    <img className={classes.image} src='/imgs/logo-clupp.png' alt='Logo Clupp'></img>
+                </Container>
 
-            <Divider style={{ color: grey[700] }} />
-        </Container>
+                <Divider style={{ color: grey[700] }} />
+            </Container>
+            {children}
+        </>
     )
 }
 

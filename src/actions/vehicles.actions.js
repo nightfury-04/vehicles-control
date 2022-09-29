@@ -50,9 +50,19 @@ const deleteVehicle = id => dispatch => {
         .doc(id)
         .delete()
         .then(() => {
-            dispatch({
-                type: DELETE_VEHICLE_SUCCESS,
-                payload: null,
+            vehiclesRef.get().then(snapshot => {
+                const vehicles = []
+                snapshot.forEach(doc => {
+                    if (doc.id !== id)
+                        vehicles.push({
+                            id: doc.id,
+                            ...doc.data(),
+                        })
+                })
+                dispatch({
+                    type: DELETE_VEHICLE_SUCCESS,
+                    payload: vehicles,
+                })
             })
         })
         .catch(error => {

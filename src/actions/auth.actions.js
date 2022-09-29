@@ -35,7 +35,7 @@ const fetchUser = () => dispatch => {
     })
 }
 
-const signIn = (username, password) => dispatch => {
+const signIn = (email, password) => dispatch => {
     dispatch({
         type: USER_SIGN_IN,
         payload: null,
@@ -43,7 +43,7 @@ const signIn = (username, password) => dispatch => {
 
     auth.setPersistence(FIREBASE_AUTH_PERSIST)
         .then(() => {
-            auth.signInWithEmailAndPassword(username, password)
+            auth.signInWithEmailAndPassword(email, password)
                 .then(user => {
                     dispatch({
                         type: USER_SIGN_IN_SUCCESS,
@@ -74,7 +74,7 @@ const signOut = () => dispatch => {
     })
 }
 
-const signUp = async (email, password) => dispatch => {
+const signUp = (email, password) => dispatch => {
     dispatch({
         type: SIGN_UP_USER,
         payload: null,

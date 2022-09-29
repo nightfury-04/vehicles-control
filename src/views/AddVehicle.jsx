@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import SelectImage from '../components/SelectImage'
 import { addVehicle } from '../actions/vehicles.actions'
-import { Container, Box, TextField, Button, IconButton, InputAdornment, Grid } from '@mui/material'
+import { Container, Box, TextField, Button, IconButton, InputAdornment, Grid, Breadcrumbs, Link } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 
 const AddVehicle = () => {
@@ -29,7 +29,6 @@ const AddVehicle = () => {
     }, [vehicleInfo.frontPictureURL, setImage])
 
     const onSubmit = e => {
-        console.log('holi')
         e.preventDefault()
         new Promise(resolve => {
             resolve()
@@ -47,6 +46,11 @@ const AddVehicle = () => {
 
     return (
         <Container>
+            <Breadcrumbs aria-label='breadcrumb' style={{ marginTop: '24px' }}>
+                <Link color='inherit' href='/'>
+                    Home
+                </Link>
+            </Breadcrumbs>
             <h1
                 style={{
                     fontSize: '32px',

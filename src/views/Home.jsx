@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteVehicle } from '../actions/vehicles.actions'
-import { Breadcrumbs, Card, CardMedia, Container, Grid, Link, InputAdornment, TextField, Typography, IconButton } from '@mui/material'
+import { Breadcrumbs, Card, CardMedia, Container, Grid, Link, InputAdornment, TextField, Typography, IconButton, Button } from '@mui/material'
 import { Search as SearchIcon, Delete as DeleteIcon } from '@mui/icons-material'
 import { makeStyles } from 'tss-react/mui'
 import { vehicleCard } from '../assets/styles'
+import { signOut } from '../actions/auth.actions'
 
 const useStyles = makeStyles()(vehicleCard)
 
 function Home() {
+    const dispatch = useDispatch()
     const vehiclesdata = useSelector(state => state.vehiclesdata)
     const [vehicles, setVehicles] = useState([])
 
@@ -22,10 +24,15 @@ function Home() {
         <Container>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <Breadcrumbs aria-label='breadcrumb' style={{ marginBottom: 0 }}>
-                        <Link color='inherit' href='/'>
-                            Vehicles
-                        </Link>
+                    <Breadcrumbs aria-label='breadcrumb' style={{ marginTop: '24px' }}>
+                        <Button
+                            color='inherit'
+                            onClick={() => {
+                                dispatch(signOut())
+                            }}
+                        >
+                            Log out
+                        </Button>
                         <Link color='inherit' href='/add-vehicle'>
                             Add vehicle
                         </Link>

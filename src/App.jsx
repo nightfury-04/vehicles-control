@@ -2,8 +2,9 @@ import { Provider } from 'react-redux'
 import { store } from './reducers/store'
 import { fetchUser } from './actions/auth.actions'
 import AuthLoading from './components/AuthLoading'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import ProtectedRoute from './components/ProtectedRoute'
+import Route from './components/UnProtectedRoute'
 
 // VIEWS
 import Home from './views/Home'

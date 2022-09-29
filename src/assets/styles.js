@@ -1,5 +1,21 @@
 import colors from './colors'
 
+const header = theme => ({
+    image: {
+        width: '258px',
+        [theme.breakpoints.down('md')]: {
+            width: '177px',
+            margin: '0 auto',
+        },
+    },
+    header: {
+        [theme.breakpoints.down('md')]: {
+            display: 'flex',
+            justifyContent: 'center',
+        },
+    },
+})
+
 const vehicleCard = theme => ({
     card: {
         position: 'relative',
@@ -20,4 +36,4 @@ const vehicleCard = theme => ({
     },
 })
 
-export { vehicleCard }
+export { vehicleCard, header }

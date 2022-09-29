@@ -66,7 +66,7 @@ function Login(props) {
                 />
 
                 <Box style={{ display: 'flex', justifyContent: 'center', margin: '20px' }}>
-                    <Button variant='contained' style={{ height: '40px', width: '150px' }}>
+                    <Button type='submit' variant='contained' style={{ height: '40px', width: '150px' }}>
                         Iniciar Sesión
                     </Button>
                 </Box>
